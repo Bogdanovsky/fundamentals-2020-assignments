@@ -53,21 +53,21 @@
         <activity
             android:name=".workshop01.step02.WS01Step02ActivityB"
             android:label="@string/ws01_step02_activity_b_title"
-            android:launchMode="standard"
+            android:launchMode="singleTop"
             />
 
         <!-- TODO(WS01:ST02) -->
         <activity
             android:name=".workshop01.step02.WS01Step02ActivityC"
             android:label="@string/ws01_step02_activity_c_title"
-            android:launchMode="standard"
+            android:launchMode="singleTask"
             />
 
         <!-- TODO(WS01:ST02) -->
         <activity
             android:name=".workshop01.step02.WS01Step02ActivityD"
             android:label="@string/ws01_step02_activity_d_title"
-            android:launchMode="standard"
+            android:launchMode="singleInstance"
             />
 
         <activity

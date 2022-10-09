@@ -40,18 +40,16 @@ class WS01Step01AssignmentActivity : AppCompatActivity() {
         }
     }
 
-    //TODO(WS01:ST01:01) Sync and Build project, start emulator, run app.
-    // In the existed app, click several times on a button. Rotate the emulator's screen and apply rotation.
-    // Check that the counter resets to the initial value.
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_COUNT_ARGUMENT, counter)
+    }
 
-    //TODO(WS01:ST01:02) Override onSavedInstanceState and onRestoreInstanceState functions.
-
-    //TODO(WS01:ST01:03) Inside the onSavedInstanceState function,
-    // put the Int "counter" value into the "outState" bundle, use "KEY_COUNT_ARGUMENT" as a key.
-
-    //TODO(WS01:ST01:04) Inside the Restore Instant State function,
-    // get the Int "counter" value from the "savedState" bundle, use "KEY_COUNT_ARGUMENT" as a key.
-    // Update text value on screen.
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        counter = savedInstanceState.getInt(KEY_COUNT_ARGUMENT)
+        tvValue?.text = getString(R.string.ws01_step01_activity_counter_text, counter)
+    }
 
     override fun onDestroy() {
         // Logging onDestroy()

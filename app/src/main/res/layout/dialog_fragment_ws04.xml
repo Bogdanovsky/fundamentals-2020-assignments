@@ -9,10 +9,12 @@
     <TextView
         android:id="@+id/tv_value"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Dialog fragmentl"
-        android:textColor="@color/white" />
+        android:text="Dialog fragment!"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cancel"/>
 
     <Button
         android:id="@+id/btn_cancel"
