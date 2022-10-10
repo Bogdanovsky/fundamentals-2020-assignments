@@ -3,31 +3,34 @@ package com.android.academy.fundamentals
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class MainActivity : AppCompatActivity() {
+
+    private var fragmentMoviesList: FragmentMoviesList? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView: TextView = findViewById(R.id.moveToMovieDetails)
-        textView.setOnClickListener {
-            moveToMovieDetails()
+        if (savedInstanceState == null) {
+            fragmentMoviesList = FragmentMoviesList.newInstance()
+            fragmentMoviesList.apply {
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.activity_main, fragmentMoviesList!!, FRAGMENT_MOVIES_LIST_TAG)
+                    .addToBackStack("list")
+                    .commit()
+            }
+        } else {
+            fragmentMoviesList = supportFragmentManager
+                .findFragmentByTag(FRAGMENT_MOVIES_LIST_TAG) as FragmentMoviesList?
         }
     }
 
-    private fun moveToMovieDetails() {
-        val intent = Intent(this, MovieDetailsActivity::class.java)
-
-//        val transmittedString = "string to transmit"
-//        intent.putExtra(MovieDetailsActivity.TRANSMITTED_STRING, transmittedString)
-//
-//        val transmittedInt = 42
-//        intent.putExtra(MovieDetailsActivity.TRANSMITTED_INT, transmittedInt)
-//
-//        val transmittedBoolean = false
-//        intent.putExtra(MovieDetailsActivity.TRANSMITTED_BOOLEAN, transmittedBoolean)
-
-        startActivity(intent)
+    companion object {
+        const val FRAGMENT_MOVIES_LIST_TAG = "FragmentMoviesList"
     }
 }

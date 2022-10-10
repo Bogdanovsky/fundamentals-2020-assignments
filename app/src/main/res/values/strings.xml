@@ -12,5 +12,8 @@
     <string name="solutions_button_yellow_text">Yellow</string>
     <string name="solutions_button_green_text">Green</string>
     <string name="_13">13+</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movies_list">Movies list</string>
 
 </resources>

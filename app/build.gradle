@@ -5,9 +5,8 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
 
-    defaultConfig {
+  defaultConfig {
         applicationId "com.android.academy.fundamentals"
         minSdkVersion 21
         targetSdkVersion 30

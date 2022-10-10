@@ -21,7 +21,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".MovieDetailsActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
