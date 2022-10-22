@@ -67,7 +67,7 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="226dp"
-                android:text="@string/_13"
+                android:text="@string/avengers_parental_guidance"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 android:textStyle="bold"

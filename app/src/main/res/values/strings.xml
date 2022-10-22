@@ -1,19 +1,31 @@
 <resources>
 
-    <string name="app_name">View and ViewGroup</string>
-
-    <string name="solutions_hello_world">Hello World!</string>
-    <string name="solutions_box_one_text">Box One</string>
-    <string name="solutions_box_two_text">Box Two</string>
-    <string name="solutions_box_three_text">Box Three</string>
-    <string name="solutions_box_four_text">Box Four</string>
-    <string name="solutions_box_five_text">Box Five</string>
-    <string name="solutions_button_red_text">Red</string>
-    <string name="solutions_button_yellow_text">Yellow</string>
-    <string name="solutions_button_green_text">Green</string>
-    <string name="_13">13+</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">My project</string>
     <string name="movies_list">Movies list</string>
+
+    <string name="avengers_parental_guidance">13+</string>
+    <string name="tenet_parental_guidance">16+</string>
+    <string name="black_widow_parental_guidance">13+</string>
+    <string name="wonder_woman_parental_guidance">13+</string>
+
+    <string name="avengers_tag">Action, Adventure, Fantasy</string>
+    <string name="tenet_tag">Action, Sci-Fi, Thriller</string>
+    <string name="black_widow_tag">Action, Adventure, Sci-Fi</string>
+    <string name="wonder_woman_tag">Action, Adventure, Fantasy</string>
+
+    <string name="avengers_review">125 REVIEWS</string>
+    <string name="tenet_review">98 REVIEWS</string>
+    <string name="black_widow_review">138 REVIEWS</string>
+    <string name="wonder_woman_review">74 REVIEWS</string>
+
+    <string name="avengers_title">Avengers: End Game</string>
+    <string name="tenet_title">Tenet</string>
+    <string name="black_widow_title">Black Widow</string>
+    <string name="wonder_woman_title">Wonder Woman 1984</string>
+
+    <string name="tenet_duration">137 MIN</string>
+    <string name="avengers_duration">97 MIN</string>
+    <string name="black_widow_duration">102 MIN</string>
+    <string name="wonder_woman_duration">120 MIN</string>
 
 </resources>
