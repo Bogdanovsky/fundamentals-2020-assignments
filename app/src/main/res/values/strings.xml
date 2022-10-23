@@ -28,4 +28,11 @@
     <string name="black_widow_duration">102 MIN</string>
     <string name="wonder_woman_duration">120 MIN</string>
 
+    --> actors -->
+
+    <string name="robert_downey_jr">Robert Downey Jr</string>
+    <string name="chris_evans">Chris Evans</string>
+    <string name="mark_ruffalo">Mark Ruffalo</string>
+    <string name="chris_hemsworth">Chris Hemsworth</string>
+
 </resources>

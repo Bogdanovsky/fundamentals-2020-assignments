@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraint_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_constraint_layout"
     android:layout_width="170dp"
     android:layout_height="296dp"
     android:layout_marginStart="12dp"
@@ -17,24 +18,24 @@
         app:srcCompat="@drawable/bg2" />
 
     <ImageView
-        android:id="@+id/poster"
+        android:id="@+id/poster_iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitStart"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avengers_poster" />
+        tools:srcCompat="@drawable/avengers_poster" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="fitStart"
         android:src="@drawable/mask2"
-        app:layout_constraintBottom_toBottomOf="@+id/poster"
+        app:layout_constraintBottom_toBottomOf="@+id/poster_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/parental_guidance"
+        android:id="@+id/parental_guidance_iv"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="6dp"
@@ -46,14 +47,14 @@
     <ImageView
         android:layout_width="16dp"
         android:layout_height="14dp"
-        android:layout_marginEnd="6dp"
         android:layout_marginTop="13dp"
+        android:layout_marginEnd="6dp"
         android:src="@drawable/heart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tag"
+        android:id="@+id/tag_tv"
         android:layout_width="match_parent"
         android:layout_height="12sp"
         android:layout_marginStart="6dp"
@@ -64,60 +65,60 @@
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/poster" />
+        app:layout_constraintTop_toTopOf="@id/poster_iv" />
 
     <ImageView
-        android:id="@+id/starIcon"
+        android:id="@+id/starIcon_iv"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/star_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag" />
+        app:layout_constraintTop_toBottomOf="@+id/tag_tv" />
 
     <ImageView
-        android:id="@+id/starIcon2"
+        android:id="@+id/starIcon2_iv"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/star_icon"
-        app:layout_constraintStart_toEndOf="@+id/starIcon"
-        app:layout_constraintTop_toBottomOf="@+id/tag" />
+        app:layout_constraintStart_toEndOf="@+id/starIcon_iv"
+        app:layout_constraintTop_toBottomOf="@+id/tag_tv" />
 
     <ImageView
-        android:id="@+id/starIcon3"
+        android:id="@+id/starIcon3_iv"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/star_icon"
-        app:layout_constraintStart_toEndOf="@+id/starIcon2"
-        app:layout_constraintTop_toBottomOf="@+id/tag" />
+        app:layout_constraintStart_toEndOf="@+id/starIcon2_iv"
+        app:layout_constraintTop_toBottomOf="@+id/tag_tv" />
 
     <ImageView
-        android:id="@+id/starIcon4"
+        android:id="@+id/starIcon4_tv"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/star_icon"
-        app:layout_constraintStart_toEndOf="@+id/starIcon3"
-        app:layout_constraintTop_toBottomOf="@+id/tag" />
+        app:layout_constraintStart_toEndOf="@+id/starIcon3_iv"
+        app:layout_constraintTop_toBottomOf="@+id/tag_tv" />
 
     <ImageView
-        android:id="@+id/starIcon5"
+        android:id="@+id/starIcon5_iv"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/star_icon"
-        app:layout_constraintStart_toEndOf="@+id/starIcon4"
-        app:layout_constraintTop_toBottomOf="@+id/tag" />
+        app:layout_constraintStart_toEndOf="@+id/starIcon4_tv"
+        app:layout_constraintTop_toBottomOf="@+id/tag_tv" />
 
     <TextView
-        android:id="@+id/reviews"
+        android:id="@+id/reviews_tv"
         android:layout_width="wrap_content"
         android:layout_height="12dp"
         android:layout_marginStart="6dp"
@@ -127,11 +128,11 @@
         android:textColor="#6D6D80"
         android:textSize="8sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/starIcon5"
-        app:layout_constraintTop_toBottomOf="@id/tag" />
+        app:layout_constraintStart_toEndOf="@id/starIcon5_iv"
+        app:layout_constraintTop_toBottomOf="@id/tag_tv" />
 
     <TextView
-        android:id="@+id/movie_title"
+        android:id="@+id/movie_title_tv"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginStart="@dimen/space_2x"
@@ -143,10 +144,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/poster" />
+        app:layout_constraintTop_toBottomOf="@id/poster_iv" />
 
     <TextView
-        android:id="@+id/duration"
+        android:id="@+id/duration_tv"
         android:layout_width="match_parent"
         android:layout_height="12dp"
         android:layout_marginHorizontal="@dimen/space_2x"
@@ -155,7 +156,7 @@
         android:textSize="8sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_title" />
+        app:layout_constraintTop_toBottomOf="@id/movie_title_tv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
