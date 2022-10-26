@@ -1,16 +1,10 @@
 package com.android.academy.fundamentals
 
 import android.app.Application
-
-private lateinit var singleton: Application
-
+import com.android.academy.fundamentals.data.Actor
+import com.android.academy.fundamentals.data.Movie
 
 class MyApplication : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        singleton = this
-    }
 
     companion object {
 
@@ -68,7 +62,7 @@ class MyApplication : Application() {
                 R.string.wonder_woman_review,
                 R.string.wonder_woman_duration
             )
-        ,Movie(
+        , Movie(
                 R.string.avengers_title,
                 R.drawable.avengers_poster,
                 R.drawable.parental_guidance_13,
@@ -144,13 +138,3 @@ class MyApplication : Application() {
         }
     }
 }
-
-//data class Movie(
-//    val title: Int,
-//    val poster: Int,
-//    val parentalGuidance: Int,
-//    val tag: Int,
-//    val rating: Int,
-//    val reviews: Int,
-//    val duration: Int
-//)
