@@ -1,5 +1,7 @@
 package com.android.academy.fundamentals
 
+import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,18 +20,18 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class MovieAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val onItemClickListener: OnItemClickListener, context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
+    private lateinit var movies: List<Movie>
     private val scope = CoroutineScope(Dispatchers.IO)
-    private var movies: List<Movie> = MyApplication().movies
 
 
-//    init {
-//        scope.launch {
-//            Log.i("TAG", "TAG #2_ ${JsonMovieRepository(MyApplication().applicationContext)}")
-//            movies = JsonMovieRepository(MyApplication().applicationContext).loadMovies()
-//        }
-//    }
+    init {
+        scope.launch {
+            Log.i("TAG", "TAG #2_ ${JsonMovieRepository(context)}")
+            movies = JsonMovieRepository(context).loadMovies()
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view: View = LayoutInflater.from(parent.context)

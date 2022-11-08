@@ -25,9 +25,12 @@ class MyApplication : Application() {
 //    )
 //    )
 
-    lateinit var movies: List<Movie>
+//    private val repo = JsonMovieRepository(this)
+//    val scope = CoroutineScope(Dispatchers.Main)
+//
+//    val movies: List<Movie> = repo.loadMovies()
 
-    init {
+//    init {
 //        Log.i("TAG", "START")
 //        try {
 //            this.assets.open("genres.json")
@@ -37,14 +40,14 @@ class MyApplication : Application() {
 //           Log.i("TAG", "START 3")
 //           e.printStackTrace()
 //       }
-        val repo = JsonMovieRepository(this)
-        Log.i("TAG", "Application init block 1")
-        val scope = CoroutineScope(Dispatchers.IO)
-        Log.i("TAG", "Application init block 2")
-        scope.launch {
-            Log.i("TAG", "Application init block 3")
-            movies = repo.loadMovies()
-        }
-//        Log.i("TAG", "Application init block 4_ movies size = ${movies.size}")
-    }
+//        val repo = JsonMovieRepository(this)
+//        Log.i("TAG", "Application init block 1")
+//        val scope = CoroutineScope(Dispatchers.IO)
+//        Log.i("TAG", "Application init block 2")
+//        scope.launch {
+//            Log.i("TAG", "Application init block 3")
+//            movies = repo.loadMovies()
+//        }
+////        Log.i("TAG", "Application init block 4_ movies size = ${movies.size}")
+//    }
 }

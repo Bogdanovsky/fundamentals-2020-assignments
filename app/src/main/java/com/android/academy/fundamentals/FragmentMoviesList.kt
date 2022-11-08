@@ -21,7 +21,8 @@ class FragmentMoviesList : Fragment(), MovieAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         val recycler: RecyclerView = view.findViewById(R.id.fragment_movies_list_recyclerview)
         recycler.layoutManager = GridLayoutManager(this.context, 2)
-        recycler.adapter = MovieAdapter(this)
+
+        recycler.adapter = context?.let { MovieAdapter(this, it) }
     }
 
     companion object {
