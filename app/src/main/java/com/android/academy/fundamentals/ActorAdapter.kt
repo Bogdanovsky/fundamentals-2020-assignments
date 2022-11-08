@@ -1,5 +1,6 @@
 package com.android.academy.fundamentals
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.academy.fundamentals.data.Actor
+import com.android.academy.fundamentals.data.JsonMovieRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorViewHolder>() {
 
-    private val actors = MyApplication.getActors()
+    private val actors = listOf<Actor>(
+        Actor(1, "Name", "imageUrl")
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -19,7 +26,7 @@ class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
-        holder.onBind(actors[position])
+//        holder.onBind(actors[position])
     }
 
     override fun getItemCount(): Int {
@@ -32,8 +39,8 @@ class ActorAdapter : RecyclerView.Adapter<ActorAdapter.ActorViewHolder>() {
         private val image: ImageView = itemView.findViewById(R.id.view_holder_actor_iv)
 
         fun onBind(actor: Actor) {
-            name.setText(actor.name)
-            image.setImageResource(actor.image)
+            name.text = actor.name
+            image.setImageResource(R.drawable.mark_ruffalo)
         }
     }
 

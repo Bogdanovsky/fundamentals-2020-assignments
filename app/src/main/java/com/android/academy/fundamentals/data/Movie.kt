@@ -1,11 +1,18 @@
 package com.android.academy.fundamentals.data
 
+import kotlinx.serialization.SerialName
+
 data class Movie(
-    val title: Int,
-    val poster: Int,
-    val parentalGuidance: Int,
-    val tag: Int,
+    val id: Int,
+    val title: String,
+    val storyLine: String,
+    val imageUrl: String,
+    val detailImageUrl: String,
     val rating: Int,
-    val reviews: Int,
-    val duration: Int
+    val reviewCount: Int,
+    val pgAge: Int,
+    val runningTime: Int,
+    val genres: List<Genre>,
+    val actors: List<Actor>,
+    val isLiked: Boolean
 )

@@ -1,6 +1,8 @@
 package com.android.academy.fundamentals.data
 
+
 data class Actor (
-    val image: Int,
-    val name: Int
+    val id: Int,
+    val name: String,
+    val imageUrl: String
 )

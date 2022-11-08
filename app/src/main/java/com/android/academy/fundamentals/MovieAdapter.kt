@@ -1,16 +1,35 @@
 package com.android.academy.fundamentals
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.android.academy.fundamentals.data.JsonMovieRepository
 import com.android.academy.fundamentals.data.Movie
+import com.android.academy.fundamentals.data.MovieRepository
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class MovieAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private val movies = MyApplication.getMovies()
+    private val scope = CoroutineScope(Dispatchers.IO)
+    private var movies: List<Movie> = MyApplication().movies
+
+
+//    init {
+//        scope.launch {
+//            Log.i("TAG", "TAG #2_ ${JsonMovieRepository(MyApplication().applicationContext)}")
+//            movies = JsonMovieRepository(MyApplication().applicationContext).loadMovies()
+//        }
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view: View = LayoutInflater.from(parent.context)
@@ -23,6 +42,7 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener) : Recyc
     }
 
     override fun getItemCount(): Int {
+//        Log.i("TAG", "TAG #1_ movies.size = ${movies.size}")
         return movies.size
     }
 
@@ -46,17 +66,23 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener) : Recyc
 
 
         fun onBind(movie: Movie) {
-            title.setText(movie.title)
-            poster.setImageResource(movie.poster)
-            parentalGuidance.setImageResource(movie.parentalGuidance)
-            tag.setText(movie.tag)
-            reviews.setText(movie.reviews)
-            duration.setText(movie.duration)
+            title.text = movie.title
+            Glide.with(poster.context)
+                .load(movie.imageUrl.toUri().buildUpon().scheme("https").build())
+                .into(poster)
+            parentalGuidance.setImageResource(
+                if (movie.pgAge >= 16) R.drawable.parental_guidance_16 else R.drawable.parental_guidance_13
+            )
+            tag.text = if (movie.genres.isEmpty()) "" else {
+                movie.genres.toString()
+            }
+            reviews.text = "${movie.reviewCount} REVIEWS"
+            duration.text = "${movie.runningTime} MIN"
             starIcon1.setImageResource(if (movie.rating > 0) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon2.setImageResource(if (movie.rating > 1) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon3.setImageResource(if (movie.rating > 2) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon4.setImageResource(if (movie.rating > 3) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon5.setImageResource(if (movie.rating > 4) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon2.setImageResource(if (movie.rating > 2) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon3.setImageResource(if (movie.rating > 4) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon4.setImageResource(if (movie.rating > 6) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon5.setImageResource(if (movie.rating > 8) R.drawable.star_icon else R.drawable.star_icon_gray)
 
             itemView.setOnClickListener {
                 onItemClickListener.onItemClicked(movie)

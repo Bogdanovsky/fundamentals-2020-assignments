@@ -1,140 +1,50 @@
 package com.android.academy.fundamentals
 
 import android.app.Application
-import com.android.academy.fundamentals.data.Actor
-import com.android.academy.fundamentals.data.Movie
+import android.util.Log
+import com.android.academy.fundamentals.data.*
+import kotlinx.coroutines.*
+import java.io.FileNotFoundException
+import java.io.IOException
 
 class MyApplication : Application() {
+//    var movies = listOf<Movie>(
+//        Movie(
+//            1,
+//            "Enf of Times",
+//            "Blah-blah-blah-blah-blah-blah-blah-blah-blah",
+//            "https://image.tmdb.org/t/p/w342/9HT9982bzgN5on1sLRmc1GMn6ZC.jpg",
+//            "https://image.tmdb.org/t/p/w342/9HT9982bzgN5on1sLRmc1GMn6ZC.jpg",
+//            8,
+//            100500,
+//            16,
+//            135,
+//            listOf(Genre(28, "Action")),
+//            listOf(Actor(84433, "Lannick Gautry", "https://image.tmdb.org/t/p/w342/h94QUkKrwUncYhJ1eMz23kBAJuc.jpg")),
+//            true
+//    )
+//    )
 
-    companion object {
+    lateinit var movies: List<Movie>
 
-        fun getActors() : List<Actor> {
-            return listOf(
-            Actor(R.drawable.robert_downey_junior, R.string.robert_downey_jr),
-            Actor(R.drawable.chris_evans, R.string.chris_evans),
-            Actor(R.drawable.mark_ruffalo, R.string.mark_ruffalo),
-            Actor(R.drawable.chris_hemsworth, R.string.chris_hemsworth),
-            Actor(R.drawable.robert_downey_junior, R.string.robert_downey_jr),
-            Actor(R.drawable.chris_evans, R.string.chris_evans),
-            Actor(R.drawable.mark_ruffalo, R.string.mark_ruffalo),
-            Actor(R.drawable.chris_hemsworth, R.string.chris_hemsworth),
-            Actor(R.drawable.robert_downey_junior, R.string.robert_downey_jr),
-            Actor(R.drawable.chris_evans, R.string.chris_evans),
-            Actor(R.drawable.mark_ruffalo, R.string.mark_ruffalo),
-            Actor(R.drawable.chris_hemsworth, R.string.chris_hemsworth)
-            )}
-
-        fun getMovies() : List<Movie> {
-        return listOf(
-            Movie(
-                R.string.avengers_title,
-                R.drawable.avengers_poster,
-                R.drawable.parental_guidance_13,
-                R.string.avengers_tag,
-                4,
-                R.string.avengers_review,
-                R.string.avengers_duration
-            ),
-            Movie(
-                R.string.tenet_title,
-                R.drawable.tenet_poster,
-                R.drawable.parental_guidance_16,
-                R.string.tenet_tag,
-                5,
-                R.string.tenet_review,
-                R.string.tenet_duration
-            ),
-            Movie(
-                R.string.black_widow_title,
-                R.drawable.black_widow_poster,
-                R.drawable.parental_guidance_13,
-                R.string.black_widow_tag,
-                4,
-                R.string.black_widow_review,
-                R.string.black_widow_duration
-            ),
-            Movie(
-                R.string.wonder_woman_title,
-                R.drawable.wonder_woman_poster,
-                R.drawable.parental_guidance_13,
-                R.string.wonder_woman_tag,
-                5,
-                R.string.wonder_woman_review,
-                R.string.wonder_woman_duration
-            )
-        , Movie(
-                R.string.avengers_title,
-                R.drawable.avengers_poster,
-                R.drawable.parental_guidance_13,
-                R.string.avengers_tag,
-                4,
-                R.string.avengers_review,
-                R.string.avengers_duration
-            ),
-            Movie(
-                R.string.tenet_title,
-                R.drawable.tenet_poster,
-                R.drawable.parental_guidance_16,
-                R.string.tenet_tag,
-                5,
-                R.string.tenet_review,
-                R.string.tenet_duration
-            ),
-            Movie(
-                R.string.black_widow_title,
-                R.drawable.black_widow_poster,
-                R.drawable.parental_guidance_13,
-                R.string.black_widow_tag,
-                4,
-                R.string.black_widow_review,
-                R.string.black_widow_duration
-            ),
-            Movie(
-                R.string.wonder_woman_title,
-                R.drawable.wonder_woman_poster,
-                R.drawable.parental_guidance_13,
-                R.string.wonder_woman_tag,
-                5,
-                R.string.wonder_woman_review,
-                R.string.wonder_woman_duration
-            ),
-            Movie(
-                R.string.avengers_title,
-                R.drawable.avengers_poster,
-                R.drawable.parental_guidance_13,
-                R.string.avengers_tag,
-                4,
-                R.string.avengers_review,
-                R.string.avengers_duration
-            ),
-            Movie(
-                R.string.tenet_title,
-                R.drawable.tenet_poster,
-                R.drawable.parental_guidance_16,
-                R.string.tenet_tag,
-                5,
-                R.string.tenet_review,
-                R.string.tenet_duration
-            ),
-            Movie(
-                R.string.black_widow_title,
-                R.drawable.black_widow_poster,
-                R.drawable.parental_guidance_13,
-                R.string.black_widow_tag,
-                4,
-                R.string.black_widow_review,
-                R.string.black_widow_duration
-            ),
-            Movie(
-                R.string.wonder_woman_title,
-                R.drawable.wonder_woman_poster,
-                R.drawable.parental_guidance_13,
-                R.string.wonder_woman_tag,
-                5,
-                R.string.wonder_woman_review,
-                R.string.wonder_woman_duration
-            )
-        )
+    init {
+//        Log.i("TAG", "START")
+//        try {
+//            this.assets.open("genres.json")
+//            Log.i("TAG", "START 2")
+//        }
+//       catch (e: Exception) {
+//           Log.i("TAG", "START 3")
+//           e.printStackTrace()
+//       }
+        val repo = JsonMovieRepository(this)
+        Log.i("TAG", "Application init block 1")
+        val scope = CoroutineScope(Dispatchers.IO)
+        Log.i("TAG", "Application init block 2")
+        scope.launch {
+            Log.i("TAG", "Application init block 3")
+            movies = repo.loadMovies()
         }
+//        Log.i("TAG", "Application init block 4_ movies size = ${movies.size}")
     }
 }
