@@ -21,7 +21,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/avengersImageView"
+                android:id="@+id/detailsImageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@drawable/mask"
-                app:layout_constraintBottom_toBottomOf="@+id/avengersImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/detailsImageView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,6 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/detailsParentalGuidanceImageView"
                 android:layout_width="24dp"
                 android:layout_height="16dp"
                 android:layout_marginStart="16dp"
@@ -75,7 +76,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/avengersTextView"
+                android:id="@+id/detailsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_4x"
@@ -100,8 +101,8 @@
                 android:textColor="#FF3466"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/avengersTextView"
-                app:layout_constraintTop_toBottomOf="@id/avengersTextView" />
+                app:layout_constraintStart_toStartOf="@id/detailsTitle"
+                app:layout_constraintTop_toBottomOf="@id/detailsTitle" />
 
             <ImageView
                 android:id="@+id/starIconImageView"

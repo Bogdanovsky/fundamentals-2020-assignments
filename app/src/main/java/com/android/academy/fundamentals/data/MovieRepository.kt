@@ -21,12 +21,10 @@ internal class JsonMovieRepository(private val context: Context) : MovieReposito
     }
 
     override suspend fun loadMovies(): List<Movie> = withContext(Dispatchers.IO) {
-        Log.i("TAG", "loadMovies function called")
         val cachedMovies = movies
         if (cachedMovies != null) {
             cachedMovies
         } else {
-            Log.i("TAG", "loadMovies function_inside else statement")
             val moviesFromJson = loadMoviesFromJsonFile()
             movies = moviesFromJson
             moviesFromJson
@@ -34,9 +32,7 @@ internal class JsonMovieRepository(private val context: Context) : MovieReposito
     }
 
     private suspend fun loadMoviesFromJsonFile(): List<Movie> {
-        Log.i("TAG", "loadMoviesFromJsonFile function called")
         val genresMap = loadGenres()
-        Log.i("TAG", "loadMoviesFromJsonFile function called 2")
         val actorsMap = loadActors()
 
         val data = readAssetFileToString("data.json")

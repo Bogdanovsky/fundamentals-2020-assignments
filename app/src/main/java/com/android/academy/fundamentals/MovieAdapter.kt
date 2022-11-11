@@ -14,6 +14,7 @@ import com.android.academy.fundamentals.data.JsonMovieRepository
 import com.android.academy.fundamentals.data.Movie
 import com.android.academy.fundamentals.data.MovieRepository
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +29,6 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener, context
 
     init {
         scope.launch {
-            Log.i("TAG", "TAG #2_ ${JsonMovieRepository(context)}")
             movies = JsonMovieRepository(context).loadMovies()
         }
     }
@@ -44,7 +44,7 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener, context
     }
 
     override fun getItemCount(): Int {
-//        Log.i("TAG", "TAG #1_ movies.size = ${movies.size}")
+        Log.i("TAG", "TAG #1_ movies.size = ${movies.size}")
         return movies.size
     }
 
@@ -71,12 +71,21 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener, context
             title.text = movie.title
             Glide.with(poster.context)
                 .load(movie.imageUrl.toUri().buildUpon().scheme("https").build())
+                .apply(
+                    RequestOptions()
+                    .placeholder(R.drawable.avengers_poster)
+                    .error(R.drawable.black_widow_poster))
                 .into(poster)
+            Log.i("TAG", movie.imageUrl)
             parentalGuidance.setImageResource(
                 if (movie.pgAge >= 16) R.drawable.parental_guidance_16 else R.drawable.parental_guidance_13
             )
             tag.text = if (movie.genres.isEmpty()) "" else {
-                movie.genres.toString()
+                var genresString = movie.genres[0].name
+                for (i in 2 until movie.genres.size) {
+                    genresString += ", ${movie.genres[i].name}"
+                }
+                genresString
             }
             reviews.text = "${movie.reviewCount} REVIEWS"
             duration.text = "${movie.runningTime} MIN"

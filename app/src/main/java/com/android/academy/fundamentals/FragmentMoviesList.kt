@@ -39,7 +39,7 @@ class FragmentMoviesList : Fragment(), MovieAdapter.OnItemClickListener {
     override fun onItemClicked(movie: Movie) {
         requireActivity().apply {
             supportFragmentManager.beginTransaction()
-                .add(R.id.activity_main, FragmentMoviesDetails())
+                .add(R.id.activity_main, FragmentMoviesDetails(movie))
                 .addToBackStack("details")
                 .commit()
         }
