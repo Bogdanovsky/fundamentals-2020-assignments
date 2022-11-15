@@ -3,6 +3,7 @@ package com.android.academy.fundamentals
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.academy.fundamentals.data.Movie
@@ -10,6 +11,7 @@ import com.android.academy.fundamentals.data.Movie
 class FragmentMoviesList : Fragment(), MovieAdapter.OnItemClickListener {
 
     private lateinit var adapter: MovieAdapter
+    private val viewModel: FragmentMoviesViewModel by viewModels { FragmentMoviesViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -23,6 +25,7 @@ class FragmentMoviesList : Fragment(), MovieAdapter.OnItemClickListener {
         recycler.layoutManager = GridLayoutManager(this.context, 2)
 
         recycler.adapter = context?.let { MovieAdapter(this, it) }
+
     }
 
     companion object {

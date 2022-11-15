@@ -11,13 +11,9 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private var fragmentMoviesList: FragmentMoviesList? = null
-//    private val repo = JsonMovieRepository(this)
-//    private val scope = CoroutineScope(Dispatchers.Main)
-//    lateinit var movies: List<Movie>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        scope.launch { movies = repo.loadMovies() }
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
