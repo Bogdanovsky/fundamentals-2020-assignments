@@ -11,15 +11,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.academy.fundamentals.data.Actor
 import com.android.academy.fundamentals.data.JsonMovieRepository
 import com.android.academy.fundamentals.data.Movie
+import com.android.academy.fundamentals.network.ImdbMovie
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ActorAdapter(movie: Movie) : RecyclerView.Adapter<ActorAdapter.ActorViewHolder>() {
+class ActorAdapter(movie: ImdbMovie) : RecyclerView.Adapter<ActorAdapter.ActorViewHolder>() {
 
-    private val actors = movie.actors
+    private val actors = listOf<Actor>(
+        Actor(1, "Mark Ruffalo", "https://i.imgur.com/DvpvklR.png"),
+        Actor(1, "Johny Depp", "https://i.imgur.com/DvpvklR.png"),
+        Actor(1, "Bred Pitt", "https://i.imgur.com/DvpvklR.png"),
+        Actor(1, "Jim Carrey", "https://i.imgur.com/DvpvklR.png"),
+        Actor(1, "Leonardo DiCaprio", "https://i.imgur.com/DvpvklR.png"),
+        Actor(1, "John Travolta", "https://i.imgur.com/DvpvklR.png"),
+        Actor(1, "Keanu Reeves", "https://i.imgur.com/DvpvklR.png")
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         val itemView = LayoutInflater.from(parent.context)

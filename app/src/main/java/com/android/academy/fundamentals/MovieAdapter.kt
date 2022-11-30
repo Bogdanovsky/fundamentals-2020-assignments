@@ -1,6 +1,5 @@
 package com.android.academy.fundamentals
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,37 +9,43 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
-import com.android.academy.fundamentals.data.JsonMovieRepository
-import com.android.academy.fundamentals.data.Movie
-import com.android.academy.fundamentals.data.MovieRepository
+import com.android.academy.fundamentals.network.ImdbMovie
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
-class MovieAdapter(private val onItemClickListener: OnItemClickListener, context: Context) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(
+    private val onItemClickListener: OnItemClickListener,
+    context: Context
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private lateinit var movies: List<Movie>
+//    private lateinit var movies: List<Movie>
+
     private val scope = CoroutineScope(Dispatchers.IO)
-
-
-    init {
-        scope.launch {
-            movies = JsonMovieRepository(context).loadMovies()
-        }
+    private val context = context
+    private var movies: List<ImdbMovie> = listOf()
+    fun setMovies(value: List<ImdbMovie>) {
+        movies = value
+        notifyDataSetChanged()
     }
+
+
+//    init {
+//        scope.launch {
+//            movies = movies ?: JsonMovieRepository(context).loadMovies()
+//        }
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_holder_movie, parent, false)
         return MovieViewHolder(view, onItemClickListener)
+
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.onBind(movies[position])
+        holder.onBind(movies[position], context)
     }
 
     override fun getItemCount(): Int {
@@ -49,7 +54,7 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener, context
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(movie: Movie)
+        fun onItemClicked(movieId: String)
     }
 
     class MovieViewHolder(itemView: View, private val onItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
@@ -67,36 +72,37 @@ class MovieAdapter(private val onItemClickListener: OnItemClickListener, context
         private val starIcon5: ImageView = itemView.findViewById(R.id.starIcon5_iv)
 
 
-        fun onBind(movie: Movie) {
+        fun onBind(movie: ImdbMovie, context: Context) {
             title.text = movie.title
-            Glide.with(poster.context)
-                .load(movie.imageUrl.toUri().buildUpon().scheme("https").build())
+            Glide.with(context)
+                .load(movie.image.toUri().buildUpon().scheme("https").build())
                 .apply(
                     RequestOptions()
                     .placeholder(R.drawable.avengers_poster)
                     .error(R.drawable.black_widow_poster))
                 .into(poster)
-            Log.i("TAG", movie.imageUrl)
+            Log.i("TAG", movie.image)
             parentalGuidance.setImageResource(
-                if (movie.pgAge >= 16) R.drawable.parental_guidance_16 else R.drawable.parental_guidance_13
+                if (false) R.drawable.parental_guidance_16 else R.drawable.parental_guidance_13
             )
-            tag.text = if (movie.genres.isEmpty()) "" else {
-                var genresString = movie.genres[0].name
-                for (i in 2 until movie.genres.size) {
-                    genresString += ", ${movie.genres[i].name}"
-                }
-                genresString
-            }
-            reviews.text = "${movie.reviewCount} REVIEWS"
-            duration.text = "${movie.runningTime} MIN"
-            starIcon1.setImageResource(if (movie.rating > 0) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon2.setImageResource(if (movie.rating > 2) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon3.setImageResource(if (movie.rating > 4) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon4.setImageResource(if (movie.rating > 6) R.drawable.star_icon else R.drawable.star_icon_gray)
-            starIcon5.setImageResource(if (movie.rating > 8) R.drawable.star_icon else R.drawable.star_icon_gray)
+            tag.text = movie.fullTitle
+//            tag.text = if (movie.genres.isEmpty()) "" else {
+//                var genresString = movie.genres[0].name
+//                for (i in 2 until movie.genres.size) {
+//                    genresString += ", ${movie.genres[i].name}"
+//                }
+//                genresString
+//            }
+            reviews.text = "${movie.imDBRating} by ${movie.imDBRatingCount} votes"
+            duration.text = "${movie.year}"
+            starIcon1.setImageResource(if (movie.imDBRating.toDouble() > 0) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon2.setImageResource(if (movie.imDBRating.toDouble() > 2) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon3.setImageResource(if (movie.imDBRating.toDouble() > 4) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon4.setImageResource(if (movie.imDBRating.toDouble() > 6) R.drawable.star_icon else R.drawable.star_icon_gray)
+            starIcon5.setImageResource(if (movie.imDBRating.toDouble() > 8) R.drawable.star_icon else R.drawable.star_icon_gray)
 
             itemView.setOnClickListener {
-                onItemClickListener.onItemClicked(movie)
+                onItemClickListener.onItemClicked(movie.id)
             }
         }
     }
